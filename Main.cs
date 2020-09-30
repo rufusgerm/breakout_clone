@@ -11,11 +11,11 @@ public class Main : Node2D
     public override void _Ready()
     {
         var player = GetNode<Player>("Player");
-        var brick = GetNode<Brick>("Brick");
+        var board = GetNode<GameBoard>("GameBoard");
         var playerStartPos = GetNode<Position2D>("StartPosition");
         var brickStartPos = GetNode<Position2D>("BrickPosition");
 
-        brick.Start(brickStartPos.Position);
+        board.Start(brickStartPos.Position);
         player.Start(playerStartPos.Position);
     }
 

@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Fonts/RobotoMono-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/RobotoMono-LightItalic.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Fonts/RobotoMono-Italic-VariableFont_wght.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+font_data = ExtResource( 3 )
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="GameTitle" type="Label" parent="."]
+anchor_right = 1.0
+margin_bottom = 86.0
+custom_fonts/font = SubResource( 1 )
+text = "Breakout Test"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameMessage" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -43.0
+margin_bottom = 43.0
+custom_fonts/font = SubResource( 2 )
+text = "Play Some Breakout!"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -150.0
+margin_bottom = -200.0
+custom_fonts/font = SubResource( 3 )
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}

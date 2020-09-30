@@ -1,1 +1,1 @@
-A simple breakout clone to help me learn the Godot gaming engine while also honing my C# skills.
+A simple breakout clone to help me learn the Godot gaming engine while also honing my C# skills. The goal is to get really situated with the basics of the engine and play around with some of its peculiarities before moving to other similar "clone" projects which will further expand my knowledgebase.

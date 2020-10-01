@@ -1,57 +1,44 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.cs" type="Script" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GameBoard.tscn" type="PackedScene" id=5]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 380.076, 2.10693 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 2.23915, 546.297 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 1.35647
-margin_top = 1.42879
-margin_right = 41.3565
-margin_bottom = 41.4288
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 41.0
+margin_bottom = 39.0
 rect_scale = Vector2( 18.0463, 27.0307 )
 color = Color( 0.0392157, 0.431373, 0.74902, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="GameBoard" parent="." instance=ExtResource( 5 )]
+
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 360, 900 )
+
+[node name="BrickPosition" type="Position2D" parent="."]
+position = Vector2( 0, 172 )
 
 [node name="Ball" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
-[node name="Borders" type="StaticBody2D" parent="."]
-
-[node name="Top" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 362.248, -0.373695 )
-shape = SubResource( 1 )
-
-[node name="Bottom" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 361.965, 1078.38 )
-scale = Vector2( 0.961279, 1 )
-shape = SubResource( 1 )
-
-[node name="Left" type="CollisionShape2D" parent="Borders"]
-position = Vector2( -0.954529, 535.505 )
-shape = SubResource( 2 )
-
-[node name="Right" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 724.796, 539.874 )
-shape = SubResource( 2 )
-
-[node name="BrickPosition" type="Position2D" parent="."]
-position = Vector2( 0, 200 )
-
-[node name="GameBoard" parent="." instance=ExtResource( 5 )]
+[node name="CountdownTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+[connection signal="BeginRound" from="." to="Ball" method="Start"]
+[connection signal="StartGame" from="HUD" to="." method="NewGame"]
+[connection signal="StartGame" from="HUD" to="Ball" method="ClearBall"]
+[connection signal="OnBrickBroken" from="Ball" to="." method="IncrementScore"]
+[connection signal="timeout" from="CountdownTimer" to="." method="OnCountdownTimerTimeout"]

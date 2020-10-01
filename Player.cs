@@ -21,7 +21,6 @@ public class Player : StaticBody2D
         var sprite = GetNode<Sprite>("Sprite");
         var size = sprite.Texture.GetSize();
         _playerWidth = size.x;
-        // Start(_startPos);
     }
 
     public override void _Process(float delta)

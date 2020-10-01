@@ -4,10 +4,12 @@
 [ext_resource path="res://Ball.cs" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.6674, 16.5557 )
+extents = Vector2( 15.4276, 15.7905 )
 
 [node name="Ball" type="KinematicBody2D"]
+collision_mask = 6
 script = ExtResource( 2 )
+MAX_SCALAR = 1.35
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Fonts/RobotoMono-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Fonts/RobotoMono-LightItalic.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Fonts/RobotoMono-Italic-VariableFont_wght.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://HUD.cs" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -17,8 +18,9 @@ size = 64
 font_data = ExtResource( 3 )
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource( 4 )
 
-[node name="GameTitle" type="Label" parent="."]
+[node name="GameTitleScore" type="Label" parent="."]
 anchor_right = 1.0
 margin_bottom = 86.0
 custom_fonts/font = SubResource( 1 )
@@ -28,7 +30,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameMessage" type="Label" parent="."]
+[node name="GameMessageTimer" type="Label" parent="."]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -42,7 +44,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
+[node name="StartButton" type="Button" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -53,3 +55,7 @@ text = "Start"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ReadyTimer" type="Timer" parent="."]
+[connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
+[connection signal="timeout" from="ReadyTimer" to="." method="OnReadyTimerTimeout"]

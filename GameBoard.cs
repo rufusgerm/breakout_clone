@@ -8,9 +8,10 @@ public class GameBoard : Node2D
     // private string b = "text";
     private int windowWidth;
     private PackedScene brick = GD.Load<PackedScene>("res://Brick.tscn");
+    private Node2D brickArea;
     private Vector2 brickSizeVector;
     private int INITIAL_OFFSET;
-    private int ROW_COUNT = 4;
+    private int ROW_COUNT = 10;
     private int COL_COUNT;
     private int BRICK_COUNT;
 
@@ -19,21 +20,20 @@ public class GameBoard : Node2D
     {
         windowWidth = (int)GetViewport().Size.x;
         brickSizeVector = (brick.Instance() as StaticBody2D).GetNode<Sprite>("Sprite").Texture.GetSize();
+        brickArea = GetNode<Node2D>("BrickArea");
         COL_COUNT = DetermineColumnCount();
         BRICK_COUNT = ROW_COUNT * COL_COUNT;
         Hide();
-        DrawGameBoard();
     }
 
     public void DrawGameBoard()
     {
-        GD.Print("Initial Offset: " + INITIAL_OFFSET);
         int i = 0;
         while (i < BRICK_COUNT)
         {
             // instance new brick
             StaticBody2D brickNode = brick.Instance() as StaticBody2D;
-            AddChild(brickNode);
+            brickArea.AddChild(brickNode);
             //position brick relative to previous
             brickNode.Position = new Vector2(
                 (i % COL_COUNT * brickSizeVector.x) + INITIAL_OFFSET,
@@ -48,8 +48,6 @@ public class GameBoard : Node2D
     {
         int brickWidth = (int)brickSizeVector.x;
         int columnCount = windowWidth / brickWidth;
-        GD.Print("Temp Col Count: " + columnCount);
-        GD.Print("Offset: " + windowWidth % brickWidth);
         INITIAL_OFFSET = ((windowWidth % brickWidth) / 2) + brickWidth / 2;
 
         return columnCount;
@@ -57,8 +55,17 @@ public class GameBoard : Node2D
 
     public void Start(Vector2 pos)
     {
-        Position = pos;
+        GetNode<Node2D>("BrickArea").Position = pos;
+        GetNode<CollisionShape2D>("Borders/Bottom").Position = new Vector2(360, 1024);
+        GetNode<CollisionShape2D>("Borders/Top").Position = new Vector2(360, 86);
+        DrawGameBoard();
+        GetNode<CollisionShape2D>("GameOverArea/CollisionShape2D").Disabled = false;
         Show();
+    }
+
+    public void OnGameOverAreaEntered(Node body)
+    {
+
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

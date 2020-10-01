@@ -1,6 +1,43 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GameBoard.cs" type="Script" id=2]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 363.692, 4.32824 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2.6373, 515.293 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 360.184, 64.1051 )
+
 [node name="GameBoard" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="Borders" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Borders"]
+position = Vector2( 360, -6 )
+shape = SubResource( 1 )
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders"]
+position = Vector2( 360, 878 )
+shape = SubResource( 1 )
+
+[node name="Left" type="CollisionShape2D" parent="Borders"]
+position = Vector2( -6, 512 )
+shape = SubResource( 2 )
+
+[node name="Right" type="CollisionShape2D" parent="Borders"]
+position = Vector2( 728, 512 )
+shape = SubResource( 2 )
+
+[node name="BrickArea" type="Node2D" parent="."]
+
+[node name="GameOverArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
+position = Vector2( 360, 950 )
+shape = SubResource( 3 )
+disabled = true
+[connection signal="body_entered" from="GameOverArea" to="." method="OnGameOverAreaEntered"]

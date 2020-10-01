@@ -3,13 +3,19 @@ using System;
 
 public class Main : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+    private int _score;
 
-    // Called when the node enters the scene tree for the first time.
+    [Signal]
+    private delegate void BeginRound();
     public override void _Ready()
     {
+
+    }
+    // Called when the node enters the scene tree for the first time.
+    public void NewGame()
+    {
+        _score = 0;
+
         var player = GetNode<Player>("Player");
         var board = GetNode<GameBoard>("GameBoard");
         var playerStartPos = GetNode<Position2D>("StartPosition");
@@ -17,6 +23,21 @@ public class Main : Node2D
 
         board.Start(brickStartPos.Position);
         player.Start(playerStartPos.Position);
+
+        GetNode<Timer>("CountdownTimer").Start();
+        var hud = GetNode<HUD>("HUD");
+        hud.NewGameSetup();
+    }
+
+    public void OnCountdownTimerTimeout()
+    {
+        EmitSignal("BeginRound");
+    }
+
+    public void IncrementScore()
+    {
+        _score++;
+        GetNode<HUD>("HUD").UpdateScore(_score);
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

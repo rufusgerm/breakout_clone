@@ -11,12 +11,15 @@ public class Ball : KinematicBody2D
     Vector2 _screenSize;
     Vector2 _startPos = new Vector2(360, 540);
 
+    [Signal]
+    public delegate void OnBrickBroken();
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _screenSize = GetViewport().Size;
         Hide();
-        Start(_startPos);
+        Start();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -27,7 +30,10 @@ public class Ball : KinematicBody2D
             string colliderType = collisionInfo.Collider.GetType().ToString();
             _velocity = _velocity.Bounce((collisionInfo.Normal));
             if (colliderType == "Brick")
+            {
                 collisionInfo.Collider.Call("Hit");
+                EmitSignal("OnBrickBroken");
+            }
             if (Scalar < MAX_SCALAR && colliderType == "Player")
             {
                 Scalar += 0.05f;
@@ -36,12 +42,16 @@ public class Ball : KinematicBody2D
 
         }
     }
-
-    public void Start(Vector2 pos)
+    public void Start()
     {
-        Position = pos;
+        Position = _startPos;
         Show();
         GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+    }
 
+    public void ClearBall()
+    {
+        Hide();
+        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
     }
 }

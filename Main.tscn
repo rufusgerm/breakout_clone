@@ -15,7 +15,7 @@ margin_top = 1.0
 margin_right = 41.0
 margin_bottom = 39.0
 rect_scale = Vector2( 18.0463, 27.0307 )
-color = Color( 0.0392157, 0.431373, 0.74902, 1 )
+color = Color( 0.0862745, 0.180392, 0.254902, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -28,7 +28,7 @@ __meta__ = {
 position = Vector2( 360, 900 )
 
 [node name="BrickPosition" type="Position2D" parent="."]
-position = Vector2( 0, 172 )
+position = Vector2( 0, 196 )
 
 [node name="Ball" parent="." instance=ExtResource( 2 )]
 
@@ -40,5 +40,6 @@ one_shot = true
 [connection signal="BeginRound" from="." to="Ball" method="Start"]
 [connection signal="StartGame" from="HUD" to="." method="NewGame"]
 [connection signal="StartGame" from="HUD" to="Ball" method="ClearBall"]
+[connection signal="SignalGameOver" from="GameBoard" to="." method="GameOver"]
 [connection signal="OnBrickBroken" from="Ball" to="." method="IncrementScore"]
 [connection signal="timeout" from="CountdownTimer" to="." method="OnCountdownTimerTimeout"]

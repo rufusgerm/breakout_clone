@@ -29,6 +29,17 @@ public class Main : Node2D
         hud.NewGameSetup();
     }
 
+    async public void GameOver()
+    {
+
+        GetNode<GameBoard>("GameBoard").Reset();
+        GetNode<Ball>("Ball").ClearBall();
+        GetNode<HUD>("HUD").Reset();
+        await ToSignal(GetTree().CreateTimer(2), "timeout");
+        GetNode<Button>("HUD/StartButton").Show();
+        GetNode<Ball>("Ball").Start();
+    }
+
     public void OnCountdownTimerTimeout()
     {
         EmitSignal("BeginRound");

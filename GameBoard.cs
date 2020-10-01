@@ -6,6 +6,9 @@ public class GameBoard : Node2D
     // Declare member variables here. Examples:
     // private int a = 2;
     // private string b = "text";
+    [Signal]
+    public delegate void SignalGameOver();
+
     private int windowWidth;
     private PackedScene brick = GD.Load<PackedScene>("res://Brick.tscn");
     private Node2D brickArea;
@@ -56,16 +59,24 @@ public class GameBoard : Node2D
     public void Start(Vector2 pos)
     {
         GetNode<Node2D>("BrickArea").Position = pos;
-        GetNode<CollisionShape2D>("Borders/Bottom").Position = new Vector2(360, 1024);
-        GetNode<CollisionShape2D>("Borders/Top").Position = new Vector2(360, 86);
         DrawGameBoard();
-        GetNode<CollisionShape2D>("GameOverArea/CollisionShape2D").Disabled = false;
+        GetNode<CollisionShape2D>("GameOverArea/CollisionShape2D").SetDeferred("disabled", false);
+        GetNode<CollisionShape2D>("Borders/PreGameBorder").SetDeferred("disabled", true);
         Show();
+    }
+
+    public void Reset()
+    {
+        GetNode<Node2D>("BrickArea").Position = new Vector2(0, 0);
+        GetNode<CollisionShape2D>("GameOverArea/CollisionShape2D").SetDeferred("disabled", true);
+        GetNode<CollisionShape2D>("Borders/PreGameBorder").SetDeferred("disabled", false);
+        Hide();
+        GetTree().CallGroup("bricks", "queue_free");
     }
 
     public void OnGameOverAreaEntered(Node body)
     {
-
+        EmitSignal("SignalGameOver");
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

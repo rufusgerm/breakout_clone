@@ -45,13 +45,15 @@ public class Ball : KinematicBody2D
     public void Start()
     {
         Position = _startPos;
+        _velocity = new Vector2(125, 200);
+        Scalar = 1;
         Show();
-        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", false);
     }
 
     public void ClearBall()
     {
         Hide();
-        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
     }
 }

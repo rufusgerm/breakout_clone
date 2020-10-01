@@ -9,19 +9,24 @@ extents = Vector2( 363.692, 4.32824 )
 extents = Vector2( 2.6373, 515.293 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 360.184, 64.1051 )
+extents = Vector2( 353.322, 46.4374 )
 
 [node name="GameBoard" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Borders" type="StaticBody2D" parent="."]
+collision_layer = 16
 
 [node name="Top" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 360, -6 )
+position = Vector2( 360, 96 )
+shape = SubResource( 1 )
+
+[node name="PreGameBorder" type="CollisionShape2D" parent="Borders"]
+position = Vector2( 360, 878 )
 shape = SubResource( 1 )
 
 [node name="Bottom" type="CollisionShape2D" parent="Borders"]
-position = Vector2( 360, 878 )
+position = Vector2( 360, 1030 )
 shape = SubResource( 1 )
 
 [node name="Left" type="CollisionShape2D" parent="Borders"]
@@ -35,9 +40,10 @@ shape = SubResource( 2 )
 [node name="BrickArea" type="Node2D" parent="."]
 
 [node name="GameOverArea" type="Area2D" parent="."]
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
-position = Vector2( 360, 950 )
+position = Vector2( 360, 975 )
 shape = SubResource( 3 )
 disabled = true
 [connection signal="body_entered" from="GameOverArea" to="." method="OnGameOverAreaEntered"]

@@ -7,11 +7,14 @@ public class HUD : CanvasLayer
     public delegate void StartGame();
 
     private int readyCount = 3;
+    private Node2D header;
+    private Label centerMessage;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-
+        header = GetNode<Node2D>("Header");
+        centerMessage = GetNode<Label>("CenterMessage");
     }
 
     public void NewGameSetup()
@@ -20,9 +23,15 @@ public class HUD : CanvasLayer
         GetNode<Timer>("ReadyTimer").Start();
     }
 
+    public void Reset()
+    {
+        centerMessage.Text = "Game Over!\n Play Again?";
+        centerMessage.Show();
+    }
+
     public void UpdateScore(int score)
     {
-        GetNode<Label>("GameTitleScore").Text = "Score: " + score;
+        header.GetNode<Label>("GameTitleScore").Text = "Score: " + score;
     }
     public void OnStartButtonPressed()
     {
@@ -34,19 +43,14 @@ public class HUD : CanvasLayer
     {
         if (readyCount > 0)
         {
-            ChangeReadyMessage();
+            centerMessage.Text = "Get Ready\n" + readyCount;
             readyCount--;
         }
         else
         {
-            GetNode<Label>("GameMessageTimer").Hide();
+            centerMessage.Hide();
             GetNode<Timer>("ReadyTimer").Stop();
         }
-    }
-
-    public void ChangeReadyMessage()
-    {
-        GetNode<Label>("GameMessageTimer").Text = "Get Ready!\n" + readyCount;
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.

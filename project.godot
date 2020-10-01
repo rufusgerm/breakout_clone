@@ -23,8 +23,8 @@ config/icon="res://icon.png"
 
 window/size/width=720
 window/size/height=1024
-window/size/resizable=false
-window/size/borderless=true
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [layer_names]
 

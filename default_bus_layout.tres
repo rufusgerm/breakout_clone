@@ -1,0 +1,38 @@
+[gd_resource type="AudioBusLayout" load_steps=4 format=2]
+
+[sub_resource type="AudioEffectDelay" id=1]
+resource_name = "Delay"
+dry = 0.85
+tap1/delay_ms = 0.0
+tap2/delay_ms = 250.0
+
+[sub_resource type="AudioEffectReverb" id=2]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectReverb" id=3]
+resource_name = "Reverb"
+room_size = 0.2
+spread = 0.77
+dry = 0.34
+wet = 0.18
+
+[resource]
+bus/0/volume_db = -0.030508
+bus/1/name = "Break"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = "Master"
+bus/1/effect/0/effect = SubResource( 1 )
+bus/1/effect/0/enabled = false
+bus/1/effect/1/effect = SubResource( 2 )
+bus/1/effect/1/enabled = false
+bus/2/name = "Pop"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = "Master"
+bus/2/effect/0/effect = SubResource( 3 )
+bus/2/effect/0/enabled = false

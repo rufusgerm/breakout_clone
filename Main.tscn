@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.cs" type="Script" id=3]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GameBoard.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Audio/bg_music.ogg" type="AudioStream" id=6]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
@@ -37,6 +38,10 @@ position = Vector2( 0, 196 )
 [node name="CountdownTimer" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -9.0
 [connection signal="BeginRound" from="." to="Ball" method="Start"]
 [connection signal="StartGame" from="HUD" to="." method="NewGame"]
 [connection signal="StartGame" from="HUD" to="Ball" method="ClearBall"]

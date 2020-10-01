@@ -9,7 +9,7 @@ public class Main : Node2D
     private delegate void BeginRound();
     public override void _Ready()
     {
-
+        GetNode<AudioStreamPlayer>("bg_music").Play();
     }
     // Called when the node enters the scene tree for the first time.
     public void NewGame()

@@ -31,13 +31,18 @@ public class Ball : KinematicBody2D
             _velocity = _velocity.Bounce((collisionInfo.Normal));
             if (colliderType == "Brick")
             {
+                GetNode<AudioStreamPlayer2D>("Break").Play();
                 collisionInfo.Collider.Call("Hit");
                 EmitSignal("OnBrickBroken");
             }
-            if (Scalar < MAX_SCALAR && colliderType == "Player")
+            else if (colliderType == "Player")
             {
-                Scalar += 0.05f;
-                _velocity *= Scalar;
+                GetNode<AudioStreamPlayer2D>("Pop").Play();
+                if (Scalar < MAX_SCALAR)
+                {
+                    Scalar += 0.05f;
+                    _velocity *= Scalar;
+                }
             }
 
         }

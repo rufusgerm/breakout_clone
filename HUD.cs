@@ -7,6 +7,7 @@ public class HUD : CanvasLayer
     public delegate void StartGame();
 
     private int readyCount = 3;
+    private int _highscore = 0;
     private Node2D header;
     private Label centerMessage;
 
@@ -23,9 +24,12 @@ public class HUD : CanvasLayer
         GetNode<Timer>("ReadyTimer").Start();
     }
 
-    public void Reset()
+    public void Reset(int score)
     {
-        centerMessage.Text = "Game Over!\n Play Again?";
+        if (score > _highscore)
+            _highscore = score;
+        header.GetNode<Label>("GameTitleScore").Text = "High Score: " + _highscore;
+        centerMessage.Text = "Game Over!\nPlay Again?";
         centerMessage.Show();
     }
 

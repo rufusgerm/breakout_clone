@@ -34,7 +34,7 @@ public class Main : Node2D
 
         GetNode<GameBoard>("GameBoard").Reset();
         GetNode<Ball>("Ball").ClearBall();
-        GetNode<HUD>("HUD").Reset();
+        GetNode<HUD>("HUD").Reset(_score);
         await ToSignal(GetTree().CreateTimer(2), "timeout");
         GetNode<Button>("HUD/StartButton").Show();
         GetNode<Ball>("Ball").Start();

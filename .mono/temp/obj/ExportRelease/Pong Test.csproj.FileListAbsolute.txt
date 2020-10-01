@@ -1,0 +1,8 @@
+/Users/rufusgerm/Godot/PongTest/.mono/temp/bin/ExportRelease/Pong Test.dll
+/Users/rufusgerm/Godot/PongTest/.mono/temp/bin/ExportRelease/Pong Test.pdb
+/Users/rufusgerm/Godot/PongTest/.mono/temp/obj/ExportRelease/Pong Test.csprojAssemblyReference.cache
+/Users/rufusgerm/Godot/PongTest/.mono/temp/obj/ExportRelease/Pong Test.AssemblyInfoInputs.cache
+/Users/rufusgerm/Godot/PongTest/.mono/temp/obj/ExportRelease/Pong Test.AssemblyInfo.cs
+/Users/rufusgerm/Godot/PongTest/.mono/temp/obj/ExportRelease/Pong Test.csproj.CoreCompileInputs.cache
+/Users/rufusgerm/Godot/PongTest/.mono/temp/obj/ExportRelease/Pong Test.dll
+/Users/rufusgerm/Godot/PongTest/.mono/temp/obj/ExportRelease/Pong Test.pdb

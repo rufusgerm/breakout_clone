@@ -9,7 +9,7 @@ extents = Vector2( 30.0332, 6.63832 )
 [node name="Brick" type="StaticBody2D" groups=[
 "bricks",
 ]]
-modulate = Color( 0.972549, 0.184314, 0.184314, 1 )
+modulate = Color( 0.941176, 0.941176, 0.941176, 1 )
 self_modulate = Color( 0.411765, 0.0588235, 0.0588235, 1 )
 collision_layer = 2147483648
 script = ExtResource( 2 )

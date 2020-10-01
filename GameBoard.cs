@@ -31,6 +31,7 @@ public class GameBoard : Node2D
 
     public void DrawGameBoard()
     {
+        Random random = new Random();
         int i = 0;
         while (i < BRICK_COUNT)
         {
@@ -38,6 +39,12 @@ public class GameBoard : Node2D
             StaticBody2D brickNode = brick.Instance() as StaticBody2D;
             brickArea.AddChild(brickNode);
             //position brick relative to previous
+            brickNode.Modulate = new Color(
+                (float)random.NextDouble(),
+                (float)random.NextDouble(),
+                (float)random.NextDouble(),
+                1f
+                );
             brickNode.Position = new Vector2(
                 (i % COL_COUNT * brickSizeVector.x) + INITIAL_OFFSET,
                 (i / COL_COUNT) * brickSizeVector.y

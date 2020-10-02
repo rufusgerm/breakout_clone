@@ -52,6 +52,7 @@ public class HUD : CanvasLayer
         }
         else
         {
+            readyCount = 3;
             centerMessage.Hide();
             GetNode<Timer>("ReadyTimer").Stop();
         }

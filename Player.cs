@@ -8,7 +8,9 @@ public class Player : StaticBody2D
     // private int a = 2;
     // private string b = "text";\
     [Export]
-    int Speed = 900;
+    int Speed = 100;
+    float speedAccumulator = 0;
+    int prevVelocity = 0;
     Vector2 _screenSize;
     // Vector2 _startPos = new Vector2(360, 900);
     float _playerWidth;
@@ -29,14 +31,23 @@ public class Player : StaticBody2D
 
         if (Input.IsActionPressed("ui_right"))
         {
+            speedAccumulator += 66;
             velocity.x += 1;
         }
-        if (Input.IsActionPressed("ui_left"))
+        else if (Input.IsActionPressed("ui_left"))
         {
+            speedAccumulator -= 66;
             velocity.x -= 1;
         }
+        else
+        {
+            speedAccumulator *= 0.7f;
+        }
 
-        velocity = velocity.Normalized() * Speed;
+        velocity = (velocity.Normalized() * Speed);
+        velocity.x += speedAccumulator;
+
+        prevVelocity = (int)velocity.x;
 
         Position += velocity * delta;
 

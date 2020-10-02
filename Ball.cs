@@ -28,21 +28,41 @@ public class Ball : KinematicBody2D
         if (collisionInfo != null)
         {
             string colliderType = collisionInfo.Collider.GetType().ToString();
+
+            if (colliderType == "Player")
+            {
+                float playerVelocity = (int)collisionInfo.Collider.Get("prevVelocity");
+
+                GD.Print("Player Velocity: " + playerVelocity);
+
+                if (playerVelocity != 0)
+                    _velocity.x = _velocity.x + (playerVelocity * 0.25f);
+                else if (Math.Abs(_velocity.x) > 125 || Math.Abs(_velocity.y) > 200)
+                {
+                    _velocity.x *= 0.85f;
+                    _velocity.y *= 0.85f;
+                    Scalar -= (Scalar >= 1.015f) ? 0.015f : 0f;
+                }
+                GetNode<AudioStreamPlayer>("Pop").Play();
+                if (Scalar < MAX_SCALAR)
+                {
+                    Scalar += 0.02f;
+                    _velocity *= Scalar;
+                }
+            }
+
             _velocity = _velocity.Bounce((collisionInfo.Normal));
+
+
             if (colliderType == "Brick")
             {
-                GetNode<AudioStreamPlayer2D>("Break").Play();
+                GetNode<AudioStreamPlayer>("Break").Play();
                 collisionInfo.Collider.Call("Hit");
                 EmitSignal("OnBrickBroken");
             }
             else if (colliderType == "Player")
             {
-                GetNode<AudioStreamPlayer2D>("Pop").Play();
-                if (Scalar < MAX_SCALAR)
-                {
-                    Scalar += 0.05f;
-                    _velocity *= Scalar;
-                }
+
             }
 
         }

@@ -43,8 +43,8 @@ one_shot = true
 stream = ExtResource( 6 )
 volume_db = -9.0
 [connection signal="BeginRound" from="." to="Ball" method="Start"]
-[connection signal="StartGame" from="HUD" to="." method="NewGame"]
 [connection signal="StartGame" from="HUD" to="Ball" method="ClearBall"]
+[connection signal="StartGame" from="HUD" to="." method="NewGame"]
 [connection signal="SignalGameOver" from="GameBoard" to="." method="GameOver"]
 [connection signal="OnBrickBroken" from="Ball" to="." method="IncrementScore"]
 [connection signal="timeout" from="CountdownTimer" to="." method="OnCountdownTimerTimeout"]
